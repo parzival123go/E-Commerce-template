@@ -31,9 +31,6 @@ def create_app():
 
 app = create_app()
 
-#Student ID: 816033508
-#Name: Richard Rattansingh
-
 # Page Routes
 
 #To update
