@@ -1,0 +1,117 @@
+from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login import UserMixin
+from App.database import db
+
+from datetime import datetime
+
+
+class User(db.Model, UserMixin):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String, nullable=False, unique=True)
+  password = db.Column(db.String(120), nullable=False)
+
+  def __init__(self, username, password):
+    self.username = username
+    self.set_password(password)
+
+  def get_json(self):
+    return {'id': self.id, 'username': self.username}
+
+  def set_password(self, password):
+    """Create hashed password."""
+    self.password = generate_password_hash(password, method='sha256')
+
+  def check_password(self, password):
+    """Check hashed password."""
+    return check_password_hash(self.password, password)
+
+
+class Staff(db.Model, UserMixin):
+  id = db.Column(db.Integer, primary_key=True)
+  username = db.Column(db.String, nullable=False, unique=True)
+  password = db.Column(db.String(120), nullable=False)
+
+  def __init__(self, username, password):
+    self.username = username
+    self.set_password(password)
+
+  def get_json(self):
+    return {'id': self.id, 'username': self.username}
+
+  def set_password(self, password):
+    """Create hashed password."""
+    self.password = generate_password_hash(password, method='sha256')
+
+  def check_password(self, password):
+    """Check hashed password."""
+    return check_password_hash(self.password, password)
+
+
+# class Student(db.Model):
+#   id = db.Column(db.Integer, primary_key=True)
+#   name = db.Column(db.String(100), nullable=False)
+#   class_name = db.Column(db.String(50))
+#   phoneNumber = db.Column(db.String(50))
+#   email = db.Column(db.String(50))
+#   karma_score = db.Column(db.Integer, default=0)
+#   reviews = db.relationship('Review', backref='student', lazy=True)
+
+#   def __init__(self, name, class_name, phoneNumber, email, karma_score):
+#     self.name = name
+#     self.class_name = class_name
+#     self.phoneNumber = phoneNumber
+#     self.email = email
+#     self.karma_score = karma_score
+
+#   def to_dict(self):
+#     return {
+#         'id': self.id,
+#         'name': self.name,
+#         'class_name': self.class_name,
+#         'karma_score': self.karma_score,
+#         'reviews': [review.to_dict() for review in self.reviews]
+#     }
+
+
+class Review(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  description = db.Column(db.Text, nullable=False)
+  rating = db.Column(db.Integer, nullable=False)
+  timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+  student_id = db.Column(db.Integer,
+                         db.ForeignKey('student.id'),
+                         nullable=False)
+
+  def __init__(self, description, rating, student_id):
+    self.description = description
+    self.rating = rating
+    self.student_id = student_id
+
+  def to_dict(self):
+    return {
+        'id': self.id,
+        'description': self.description,
+        'rating': self.rating,
+        'timestamp': self.timestamp.strftime('%Y-%m-%d %H:%M:%S'),
+        'student_id': self.student_id
+    }
+
+
+class Karma(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  upVotes = db.Column(db.Integer, default=0)
+  downVotes = db.Column(db.Integer, default=0)
+  review_id = db.Column(db.Integer, db.ForeignKey('review.id'), nullable=False)
+
+  def __init__(self, upVotes, downVotes, review_id):
+    self.upVotes = upVotes
+    self.downVotes = downVotes
+    self.review_id = review_id
+
+  def to_dict(self):
+    return {
+        'karmaID': self.id,
+        'upVotes': self.upVotes,
+        'downVotes': self.downVotes,
+        'reviewID': self.review_id
+    }
