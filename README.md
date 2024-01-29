@@ -1,4 +1,4 @@
-# INFO 2602 Assignment 2
+# Flask Saas System
 
 
 # Setup
