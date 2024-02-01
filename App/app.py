@@ -58,6 +58,12 @@ def index():
 def signup():
   return render_template("signup.html")
 
+@app.route("/logout", methods=['GET'])
+@login_required
+def logout_action():
+  logout_user()      #logs out user and redirects to the main page (login page)
+  #flash('Logging Out')
+  return redirect('/')
 
 @app.route("/login", methods=['POST'])
 def login_func():

@@ -5,7 +5,18 @@
 {% block page %}{% endblock %}
 
 {% block link%}
+
 <ul id="nav-mobile" class="right">
+    <li class="navbar-item">Recent</li>
+      <li class="navbar-item">Starred</li>
+      <li class="navbar-item navbar-item-more">More <i class="fas fa-caret-down"></i></li>
+      <li class="navbar-item navbar-item-separator">|</li>
+      <li class="navbar-item">
+        <form class="navbar-search-form">
+          <input type="text" class="navbar-search-input" placeholder="Search">
+          <button type="submit" class="navbar-search-button"><i class="fas fa-search"></i></button>
+        </form>
+      </li>
     <li><a href="/logout">Logout</a></li>
 </ul>
 {% endblock %}
