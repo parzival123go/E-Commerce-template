@@ -9,6 +9,7 @@ from flask_login import LoginManager, current_user, login_user, login_required, 
 
 login_manager = LoginManager()
 
+
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(user_id)
@@ -31,6 +32,7 @@ def create_app():
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=12)
     CORS(app)
     db.init_app(app)
+    login_manager.init_app(app) 
     app.app_context().push()
     return app
 
@@ -47,9 +49,15 @@ def login():
   return render_template("login.html")
 
 
-@app.route('/')
+@app.route('/app')
 def index():
    return render_template("home.html")
+
+
+@app.route('/signup')
+def signup():
+  return render_template("signup.html")
+
 
 @app.route("/login", methods=['POST'])
 def login_func():
