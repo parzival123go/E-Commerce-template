@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Baskervville&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: 'Baskervville', serif;
+}
+
+.container{
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+a{
+  display:inline-block;
+  cursor:pointer;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration:underline;
+}
+
+.img-fluid{
+  max-width: 100%;
+}
+
+/* header */
+header{
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  box-shadow:  2px 4px 4px 1px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+}
+
+header .row{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+nav a{
+  display: inline-block;
+  margin-left: 20px;
+  color: #6C7178;
+  font-size: 18px;
+}
+
+.account,.cart{
+  margin-top: 13px;
+  margin-left: 20px;
+  display: inline-block;
+  color: #6c7178;
+  font-size: 18px;
+}
+
+.logo{
+  font-size: 28px;
+  line-height: 1.5;
+  color: #797979;
+}
+
+.logo:hover{
+  text-decoration: none;
+}
+
+/* hero-section */
+.hero{
+  height:600px;
+  width:100%;
+  max-width:100%;
+  background-image:linear-gradient(rgba(38, 43, 57, 0.2),rgba(38, 43, 57, 0.5)),url('https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80');
+  background-size:cover;
+  background-position:center;
+}
+
+.hero .container{
+  padding:20px;
+  position:relative;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.hero h1{
+  font-size: calc(2rem + 3vw);
+  margin-bottom:8px;
+  color:white;
+  font-weight: 500;
+}
+
+.hero a{
+  font-size: calc(1rem + 1vw);
+  margin-bottom:20px;
+  color:white;
+}
+
+.hero .shop-now{
+  display:block;
+  text-align:center;
+  background-color:black;
+  padding:10px 0px;
+  border-radius:3px;
+  width:150px;
+  text-decoration:none;
+}
+
+/* collection */
+.collection{
+  padding:50px 20px;
+}
+
+.collection .container{
+  text-align:center;
+}
+
+h2{
+  margin-bottom: 50px;
+  font-weight:500;
+  font-size:calc(2em + 3vw);
+}
+
+.collection .row{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+
+.collection .col{
+  margin: 0 auto 40px auto;
+}
+
+
+.collection .figcaption{
+  font-size:22px;
+}
+
+.collection .figcaption a{
+    color: black;
+    text-decoration: none;
+}
+
+.collection .figcaption a:hover{
+   text-decoration: underline;
+}
+
+/* shoes */
+.shoes{
+  padding: 50px 0px;
+}
+
+.shoes .container{
+  text-align: center;
+}
+
+.shoes p{
+  font-size: 20px;
+}
+
+.link{
+  font-size: 18px;
+  color: black;
+  font-weight: 600;
+}
+
+.shoes .row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.shoes .col{
+   margin: 0 auto 20px auto;
+}
+
+/* footer */
+footer{
+  background-color: whitesmoke;
+  padding:50px 0px;
+}
+
+footer .container{
+  padding: 20px 0px;
+}
+
+h3{
+  margin-bottom: 10px;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+footer p{
+  font-size: 17px;
+  line-height: 1.33;
+}
+
+.form{
+  margin-top: 5px;
+}
+
+.input-email{
+  outline: 0px;
+  border:0.5px solid #444444;
+  padding: 10px 40px 10px 10px;
+  font-family: inherit;
+  margin-bottom: 10px;
+}
+
+.btn-dark{
+  font-family: inherit;
+  outline: none;
+  border: 0.5px solid #444444;
+  padding: 10px 30px;
+  cursor: pointer;
+  background-color: #444444;
+  color: white;
+}
+
+footer .row{
+  padding: 50px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer-options{
+  border-bottom: 1px solid #dee2e6;
+}
+
+footer .col{
+  margin-bottom: 40px;
+}
+
+footer h4{
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #444444;
+}
+
+footer ul li{
+  list-style: none;
+}
+
+footer ul a{
+  font-size: 18px;
+  color: #949494;
+  line-height: 2;
+}
+
+footer ul a:hover{
+  color: #949494;
+}
+
+.social-media{
+  color: #b2b2b2;
+  margin-right: 20px;
+  font-size: 24px;
+}
+
+.copyright{
+  font-size: 20px;
+  letter-spacing: 0.17px;
+  color: #b2b2b2;
+}
