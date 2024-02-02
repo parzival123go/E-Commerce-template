@@ -49,7 +49,7 @@ def login():
   return render_template("login.html")
 
 
-@app.route('/app')
+@app.route('/home')
 def index():
    return render_template("home.html")
 
@@ -65,7 +65,7 @@ def login_func():
     user = User.query.filter_by(username = data['username']).first()    #finds matching entry
     if user and user.check_password(data['password']):
       login_user(user)    #if match found, log user in and redirect to their home page
-      return redirect('/app')    
+      return redirect('/home')    
     else:
       flash('something wrong')    #else display error and redirect to login page again
       return redirect('/') 
