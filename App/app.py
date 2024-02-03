@@ -3,7 +3,7 @@ from datetime import timedelta
 from flask import Flask, jsonify, request, render_template,flash,redirect, url_for
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
-from .models import db, User
+from .models import db, User, Product
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 
 
@@ -72,6 +72,31 @@ def dashboard():
 @app.route('/orders')
 def orders():
   return render_template("/dashboard/orders.html")
+
+@app.route('/products') 
+def products():
+  products = Product.query.all()
+  return render_template("/dashboard/products.html",products = products)
+
+@app.route('/product', methods=['POST'])
+def add_product():
+    name = request.form['name']
+    description = request.form['description']
+    price = request.form['price']
+   # image_url = request.form['image_url']  # You'll need to handle image upload separately
+   
+
+    product = Product(name=name, description=description, price=price)
+    db.session.add(product)
+    db.session.commit()
+
+    return {'id': product.id}, 201
+
+@app.route('/add-product', methods=['GET'])
+def add_product_form():
+    return render_template('/dashboard/add_product.html')
+
+
 
 @app.route("/login", methods=['POST'])
 def login_func():

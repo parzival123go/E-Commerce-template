@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+</head>
+<body>
+    <h1>Add Product</h1>
+    <form method="POST" id="product-form" action="/product" enctype="multipart/form-data">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" required></textarea><br>
+        <label for="price">Price:</label><br>
+        <input type="number" id="price" name="price" required><br>
+        <label for="image">Image:</label><br>
+        <input type="text" id="image_url" name="image_url"  ><br>
+        <input type="submit" value="Submit">
+    </form>
+    <button onclick="window.location.href='/products';">Back to Products</button>
+</body>
+
+</html>
