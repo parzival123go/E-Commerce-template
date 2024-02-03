@@ -1,6 +1,6 @@
 import os
 from datetime import timedelta
-from flask import Flask, jsonify, request, render_template,flash,redirect
+from flask import Flask, jsonify, request, render_template,flash,redirect, url_for
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
 from .models import db, User
@@ -67,7 +67,11 @@ def logout_action():
 
 @app.route('/dashboard')
 def dashboard():
-  return render_template("dashboard.html")
+  return render_template("/dashboard/dashboard.html")
+
+@app.route('/orders')
+def orders():
+  return render_template("/dashboard/orders.html")
 
 @app.route("/login", methods=['POST'])
 def login_func():
