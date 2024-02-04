@@ -67,7 +67,7 @@ def logout_action():
 
 @app.route('/dashboard')
 def dashboard():
-  return render_template("/dashboard/dashboard.html")
+  return render_template("/product-admin/index.html")
 
 @app.route('/orders')
 def orders():
@@ -76,7 +76,7 @@ def orders():
 @app.route('/products') 
 def products():
   products = Product.query.all()
-  return render_template("/dashboard/products.html",products = products)
+  return render_template("/product/products.html",products = products)
 
 @app.route('/product', methods=['POST'])
 def add_product():
