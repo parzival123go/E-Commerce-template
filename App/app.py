@@ -75,8 +75,7 @@ def orders():
 
 @app.route('/products') 
 def products():
-  products = Product.query.all()
-  return render_template("/product/products.html",products = products)
+  return render_template("/product-admin/products.html")
 
 @app.route('/product', methods=['POST'])
 def add_product():
