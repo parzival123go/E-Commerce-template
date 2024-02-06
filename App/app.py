@@ -50,7 +50,7 @@ def login():
 
 
 @app.route('/home')
-def index():
+def home():
    return render_template("home.html")
 
 
@@ -65,7 +65,7 @@ def logout_action():
   #flash('Logging Out')
   return redirect('/')
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['GET'])
 def dashboard():
   return render_template("/product-admin/index.html")
 
@@ -73,9 +73,17 @@ def dashboard():
 def orders():
   return render_template("/dashboard/orders.html")
 
-@app.route('/products') 
+@app.route('/edit-product', methods=['GET']) 
+def edit_product():
+  return render_template("/product-admin/products.html")
+
+@app.route('/products', methods=['GET']) 
 def products():
   return render_template("/product-admin/products.html")
+
+@app.route('/accounts', methods=['GET']) 
+def accounts():
+  return render_template("/product-admin/accounts.html")
 
 @app.route('/product', methods=['POST'])
 def add_product():
