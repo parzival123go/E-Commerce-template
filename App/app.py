@@ -101,7 +101,7 @@ def add_product():
 
 @app.route('/add-product', methods=['GET'])
 def add_product_form():
-    return render_template('/dashboard/add_product.html')
+    return render_template('/product-admin/add-product.html')
 
 
 

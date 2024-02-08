@@ -38,4 +38,8 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     image_url = db.Column(db.String(200), nullable=True)
 
-    
+    def __init__(self, name, description, price, image_url):
+        self.name = name
+        self.description = description
+        self.price = price
+        self.image_url = image_url
