@@ -5,7 +5,11 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
 from .models import db, User, Product
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
+from werkzeug.utils import secure_filename
 
+
+
+UPLOAD_FOLDER = '/uploads'
 
 login_manager = LoginManager()
 
@@ -30,6 +34,7 @@ def create_app():
     app.config['PREFERRED_URL_SCHEME'] = 'https'
     app.config["JWT_TOKEN_LOCATION"] = ["headers"]
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=12)
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     CORS(app)
     db.init_app(app)
     login_manager.init_app(app) 
@@ -79,29 +84,25 @@ def edit_product():
 
 @app.route('/products', methods=['GET']) 
 def products():
+
   return render_template("/product-admin/products.html")
 
 @app.route('/accounts', methods=['GET']) 
 def accounts():
   return render_template("/product-admin/accounts.html")
 
-@app.route('/product', methods=['POST'])
+@app.route('/add-product', methods=['GET','POST'])
 def add_product():
-    name = request.form['name']
-    description = request.form['description']
-    price = request.form['price']
-   # image_url = request.form['image_url']  # You'll need to handle image upload separately
-   
-
-    product = Product(name=name, description=description, price=price)
-    db.session.add(product)
-    db.session.commit()
-
-    return {'id': product.id}, 201
-
-@app.route('/add-product', methods=['GET'])
-def add_product_form():
-    return render_template('/product-admin/add-product.html')
+    if request.method == 'POST':
+      product_name = request.form['product_name']
+      description = request.form['description']
+      product = Product(product_name)
+      db.session.add(product)
+      db.session.commit()
+      print("Successfuly added to database")
+    else:
+      return render_template("/product-admin/add-product.html")
+ 
 
 
 

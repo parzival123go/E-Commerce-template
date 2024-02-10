@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
 db = SQLAlchemy()
 
 class User(db.Model, UserMixin):
@@ -33,13 +34,18 @@ class User(db.Model, UserMixin):
     
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False)
+    produt_name = db.Column(db.String(80), nullable=False)
     description = db.Column(db.String(200), nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    image_url = db.Column(db.String(200), nullable=True)
+    category = db.Column(db.String(80))
+    expire_date = db.Column(db.Date) 
+    expire_date = datetime.strptime("21 March 2019", "%d %B %Y").date()
+    units_in_stock = db.Column(db.Integer, nullable=False)
+   # product_image = db.Column(db.File(200), nullable=True)
 
-    def __init__(self, name, description, price, image_url):
-        self.name = name
+    def __init__(self, product_name, description, category, expire_date, units_in_stock):
+        self.produt_name = product_name
         self.description = description
-        self.price = price
-        self.image_url = image_url
+        self.category = category
+        self.expire_date = expire_date
+        self.units_in_stock = units_in_stock
+
