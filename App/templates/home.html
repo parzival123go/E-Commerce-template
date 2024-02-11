@@ -40,6 +40,20 @@
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="../static/assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
+
+      <div class="flash-messages" id="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -693,7 +707,7 @@
              <div class="flip-card__inner">
                 <div class="flip-card__front">
                    <div class="title">Log in</div>
-                   <form action="" class="flip-card__form">
+                   <form method="POST" action="/login" class="flip-card__form">
                       <input type="email" placeholder="Email" name="email" class="flip-card__input">
                       <input type="password" placeholder="Password" name="password" class="flip-card__input">
                       <button class="flip-card__btn">Let`s go!</button>
@@ -701,8 +715,8 @@
                 </div>
                 <div class="flip-card__back">
                    <div class="title">Sign up</div>
-                   <form action="" class="flip-card__form">
-                      <input type="name" placeholder="Name" class="flip-card__input">
+                   <form method="POST" action="/signup" class="flip-card__form">
+                      <input type="name" placeholder="Name" name="name" class="flip-card__input">
                       <input type="email" placeholder="Email" name="email" class="flip-card__input">
                       <input type="password" placeholder="Password" name="password" class="flip-card__input">
                       <button class="flip-card__btn">Confirm!</button>
@@ -849,7 +863,32 @@
   <!-- Template Main JS File -->
   <script src="../static/assets/js/main.js"></script>
 
-  
+  <script>
+    // Function to show flash message
+    function showFlashMessage(message) {
+        var flashContainer = document.getElementById('flash-messages');
+        flashContainer.innerHTML = message;
+        flashContainer.style.display = 'block'; // Show the container
+        setTimeout(function() {
+            flashContainer.style.display = 'none'; // Hide the container after 10 seconds
+        }, 10000); // 10 seconds in milliseconds
+    }
+</script>
+
+  <style>
+    
+    .flash-messages {
+        position: fixed; /* Position the container relative to the viewport */
+        bottom: 10px; /* Distance from the bottom of the viewport */
+        left: 10px; /* Distance from the left of the viewport */
+        background-color: white; /* White background */
+        color: red; /* Red text color */
+        padding: 10px; /* Add padding for better readability */
+        border: 1px solid red; /* Red border */
+        border-radius: 10px; /* Curved corners */
+        display: none; /* Initially hide the container */
+    }
+  </style>
 
 </body>
 
