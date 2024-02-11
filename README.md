@@ -1,6 +1,6 @@
 # Flask Saas System
 
-Employee Time Tracking
+E-commerce Template
 
 # Open on GitPod
 

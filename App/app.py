@@ -96,10 +96,13 @@ def add_product():
     if request.method == 'POST':
       product_name = request.form['product_name']
       description = request.form['description']
-      product = Product(product_name)
+      category = request.form['category']
+      expire_date = request.form['expire_date']
+      units_in_stock = request.form['units_in_stock']
+      product = Product(product_name,description,category,expire_date, units_in_stock)
       db.session.add(product)
       db.session.commit()
-      print("Successfuly added to database")
+      return "Successfuly added to database"
     else:
       return render_template("/product-admin/add-product.html")
  
