@@ -6,6 +6,7 @@ from flask_jwt_extended import create_access_token, jwt_required, JWTManager, ge
 from .models import db, User, Product
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 from werkzeug.utils import secure_filename
+from flask import render_template
 
 
 
@@ -51,7 +52,7 @@ jwt = JWTManager(app)  #setup flask jwt-e to work with app
 @app.route("/login", methods=['GET'])
 def login():
    #return redirect(url_for('home_page'))
-  return render_template("login.html")
+  return render_template("home.html")
 
 
 @app.route('/home')
@@ -59,9 +60,18 @@ def home():
    return render_template("home.html")
 
 
-@app.route('/signup')
-def signup():
-  return render_template("signup.html")
+@app.route("/signup", methods=['POST'])
+def signup_user():
+    data = request.form
+    user = User.query.filter_by(email=data['email']).first()
+    if user:
+        flash("Email taken, please try again !!!")       
+        return redirect(url_for('login') + '#getStarted')
+    user = User(name=data['name'], email=data['email'], password=data['password'])
+    flash("Account created for " + user.email)
+    db.session.add(user)
+    db.session.commit()
+    return redirect('/dashboard')
 
 @app.route("/logout", methods=['GET'])
 @login_required
@@ -111,13 +121,13 @@ def add_product():
 
 @app.route("/login", methods=['POST'])
 def login_func():
-    data = request.form      #gets data entered by user (username, pw)
-    user = User.query.filter_by(username = data['username']).first()    #finds matching entry
+    data = request.form      #gets data entered by user (email, pw)
+    user = User.query.filter_by(email = data['email']).first()    #finds matching entry
     if user and user.check_password(data['password']):
-      login_user(user)    #if match found, log user in and redirect to their home page
-      return redirect('/home')    
+      login_user(user)    #if match found, log user in and redirect to their dashboard page
+      return redirect('/dashboard')    
     else:
-      flash('something wrong')    #else display error and redirect to login page again
+      flash('Incorrect Email or Password . Retry !!')    #else display error and redirect to login page again
       return redirect('/') 
 
 if __name__ == "__main__":

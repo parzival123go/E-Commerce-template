@@ -12,7 +12,6 @@ class User(db.Model, UserMixin):
   is_admin = db.Column(db.Boolean, default=False)
   products = db.relationship('Product', backref=db.backref('users', lazy='joined'))
 
-
   def __init__(self, name, email,is_admin, password):
     self.name = name
     self.email = email
@@ -36,13 +35,15 @@ class User(db.Model, UserMixin):
       return f'<User {self.id}: {self.name}>'  
 
 
+
 class Category(db.Model):
   id= db.Column(db.Integer, primary_key=True)
   category_name= db.Column(db.String(80), nullable=False)
   product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
 
-  def __init__(name):
+  def __init__(self,name):
     self.category_name = name
+
     
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
