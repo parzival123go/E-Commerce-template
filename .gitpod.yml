@@ -13,3 +13,4 @@ vscode:
     - ms-python.python
     - alexcvzz.vscode-sqlite
   
+    - ms-python.debugpy
